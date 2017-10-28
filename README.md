@@ -1,8 +1,6 @@
-# Dotfiles
- ---- hacker1db Modified dot files!  
-# I have an edits branch for things I am working on and considering adding to my workflow! 
+# Dotfiles: Configuration settings for tmux, neovim, and more
      
-    These dot files are from @nicknisi 
+    These dot files are from @nicknisi and @hacker1db originally. Thanks for the rocking config, guys! 
 Copy and paste the following to Install my modified dotfiles I use solarzied Theme personally its easier on the eyes if you dont like it you can switch it 
 or type light in terminal to change it to a light version of solarized but it will switch it back in when you run 
 tmux I am working on trying to fix it but it will take time! 
@@ -13,7 +11,7 @@ and share your thoughts!  what works for me wont always work for you but smile a
 
 
 
-    git clone https://github.com/hacker1db/Dotfiles.git ~/.dotfiles
+    git clone https://github.com/defilan/dotfiles.git ~/.dotfiles
 
     cd ~/.dotfiles
 
