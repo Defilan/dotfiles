@@ -57,6 +57,8 @@ set wrapmargin=8            " wrap lines when coming within n characters from si
 set linebreak               " set soft wrapping
 set showbreak=…             " show ellipsis at breaking
 
+set clipboard=unnamed
+
 set autoindent              " automatically set indent of new line
 set smartindent
 
