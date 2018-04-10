@@ -1,10 +1,10 @@
 
 # gitconfig
 [user]
-	name = Christopher P. Maher
-    email = defilan@gmail.com
+	name = 
+    email = 
 [github]
-    user = defilan 
+    user =  
 [init]
     templatedir = ~/.dotfiles/git/templates
 [alias]
