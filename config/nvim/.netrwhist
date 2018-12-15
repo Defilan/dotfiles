@@ -1,10 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
-let g:netrw_dirhist_1='/home/maher/.dotfiles'
-let g:netrw_dirhist_2='/home/maher/.dotfiles/tmux'
-let g:netrw_dirhist_3='/home/maher/.dotfiles'
-let g:netrw_dirhist_4='/home/maher/.dotfiles/tmux'
-let g:netrw_dirhist_5='/home/maher/stuffy/chefwork/chef_fedora_base'
-let g:netrw_dirhist_6='/home/maher/stuffy/chefwork/chef_fedora_base/recipes'
-let g:netrw_dirhist_7='/home/maher/.dotfiles'
-let g:netrw_dirhist_8='/home/maher/.dotfiles/tmux'
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/Users/maher/stuffy/code/hab/hab_centos_base'
+let g:netrw_dirhist_2='/Users/maher/stuffy/code/hab/hab_centos_base/hab_centos_base'
+let g:netrw_dirhist_3='/Users/maher/stuffy/code/hab/hab_centos_base/hab_centos_base/aag_centos_base'

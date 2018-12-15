@@ -4,6 +4,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'dracula/vim'
 
 " utilities
+Plug 'w0rp/ale'
  Plug 'ctrlpvim/ctrlp.vim' " fuzzy file finder, mapped to <leader>t
 Plug 'mustache/vim-mustache-handlebars' " HandleBars syntax hightlighting
 Plug 'cespare/vim-toml' " Syntax highlighting for toml

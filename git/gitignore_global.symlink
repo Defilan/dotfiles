@@ -19,3 +19,10 @@ Icon
 
 # typescript command garbage
 tscommand*.txt
+
+
+#  Local .terraform directories
+**/.terraform/*
+
+# .tfvars files
+*.tfvars
