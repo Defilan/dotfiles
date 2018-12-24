@@ -1,5 +1,2 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/Users/maher/stuffy/code/hab/hab_centos_base'
-let g:netrw_dirhist_2='/Users/maher/stuffy/code/hab/hab_centos_base/hab_centos_base'
-let g:netrw_dirhist_3='/Users/maher/stuffy/code/hab/hab_centos_base/hab_centos_base/aag_centos_base'
+let g:netrw_dirhist_cnt =0
