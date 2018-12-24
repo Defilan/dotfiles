@@ -4,6 +4,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'dracula/vim'
 
 " utilities
+Plug 'w0rp/ale'
  Plug 'ctrlpvim/ctrlp.vim' " fuzzy file finder, mapped to <leader>t
 Plug 'mustache/vim-mustache-handlebars' " HandleBars syntax hightlighting
 Plug 'cespare/vim-toml' " Syntax highlighting for toml
@@ -74,6 +75,7 @@ Plug 'timcharper/textile.vim', { 'for': 'textile' } " textile support
 Plug 'tclem/vim-arduino' " arduino support - compile wihtout needing to open the arduino IDE
 Plug 'elzr/vim-json', { 'for': 'json' } " JSON support
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' } " ruby support
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'hashivim/vim-terraform', { 'for': 'terraform'}
 " Python
 Plug 'nvie/vim-flake8' "Python Code Checker

@@ -22,12 +22,10 @@ brew cask install visual-studio-code
 brew cask install iterm2
 brew install hub
 brew install macvim --override-system-vim
-brew install reattach-to-user-namespace
 brew install tmux
 brew install zsh
 brew install highlight
 brew install nvm
-brew install z
 brew install markdown
 brew install node
 brew install zsh-syntax-highlighting
@@ -35,14 +33,12 @@ brew install zsh-autosuggestions
 brew install nmap 
 echo "Installing desktop application..."
 
-brew cask install google-chrome
+brew cask install firefox
 brew cask install spotify
 brew cask install slack
 brew cask install visual-studio-code
 brew cask install virtualbox
 brew cask install iterm2
-brew cask install microsoft-office
-brew cask install 1password
 
 echo "Installing neovim..."
 # install neovim
