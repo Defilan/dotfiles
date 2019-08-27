@@ -12,7 +12,13 @@ brew install wget
 #tools for chef dev
 brew install packer
 brew cask install vagrant
-brew cask install chefdk
+brew tap homebrew/cask-fonts
+brew tap habitat-sh/habitat
+brew install hab
+brew install git-extras
+brew install dotnet-sdk
+brew install mono
+brew install kubernetes-cli
 
 # development tools
 brew install git
@@ -33,15 +39,13 @@ brew install zsh-autosuggestions
 brew install nmap 
 echo "Installing desktop application..."
 
-brew cask install firefox
 brew cask install spotify
 brew cask install slack
-brew cask install visual-studio-code
 brew cask install virtualbox
 brew cask install iterm2
 
 echo "Installing neovim..."
 # install neovim
-brew install --HEAD  neovim/neovim/neovim
+brew install neovim
 
 exit 0

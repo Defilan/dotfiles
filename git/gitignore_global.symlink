@@ -23,6 +23,3 @@ tscommand*.txt
 
 #  Local .terraform directories
 **/.terraform/*
-
-# .tfvars files
-*.tfvars
