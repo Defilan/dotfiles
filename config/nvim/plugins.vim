@@ -66,6 +66,7 @@ Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' } " sass scss syntax support
 " markdown
 Plug 'itspriddle/vim-marked', { 'for': 'markdown', 'on': 'MarkedOpen' } " Open markdown files in Marked.app - mapped to <leader>m
 Plug 'tpope/vim-markdown', { 'for': 'markdown' } " markdown support
+Plug 'stephpy/vim-yaml', { 'for': 'yaml' }
 
 " language-specific plugins
 Plug 'martinda/Jenkinsfile-vim-syntax', { 'for': 'Jenkinsfile' } " Jenkinsfile support

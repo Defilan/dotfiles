@@ -1,12 +1,12 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =7
+let g:netrw_dirhistcnt =1
+let g:netrw_dirhist_1='/Users/maher/.dotfiles/config/nvim'
+let g:netrw_dirhist_0='/Users/maher/.dotfiles/config'
+let g:netrw_dirhist_9='/Users/maher/.dotfiles'
+let g:netrw_dirhist_8='/Users/maher/stuffy/code/docker/docker_aag_adoagent_tf'
 let g:netrw_dirhist_7='/Users/maher/stuffy/code/hab/core-plans/main-core-plans/bin/ci'
 let g:netrw_dirhist_6='/Users/maher/stuffy/code/hab/hab_buildbox/terraform'
 let g:netrw_dirhist_5='/Users/maher/stuffy/code/hab/hab_buildbox'
 let g:netrw_dirhist_4='/Users/maher/stuffy/code/hab/hab_buildbox/habitat'
 let g:netrw_dirhist_3='/Users/maher/stuffy/code/hab/hab_buildbox'
 let g:netrw_dirhist_2='/Users/maher/stuffy/code/hab/aag_hab_ascomsvr/cookbooks/role_hab_ascomsvr/recipes'
-let g:netrw_dirhist_1='/Users/maher/stuffy/code/hab/aag_hab_ascomsvr/cookbooks/role_hab_ascomsvr'
-let g:netrw_dirhist_0='/Users/maher/stuffy/code/hab/aag_hab_ascomsvr/cookbooks'
-let g:netrw_dirhist_9='/Users/maher/stuffy/code/hab/aag_hab_ascomsvr'
-let g:netrw_dirhist_8='/Users/maher/stuffy/code/hab/aag_hab_ascomsvr/habitat'
