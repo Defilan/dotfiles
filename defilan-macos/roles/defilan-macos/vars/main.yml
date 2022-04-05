@@ -1,6 +1,10 @@
 ---
 # vars file for defilan-macos
 
+homebrew_taps:
+- hashicorp/tap
+- homebrew/cask-fonts
+
 homebrew_packages:
 - neovim
 - tmux
@@ -9,6 +13,10 @@ homebrew_packages:
 - neovim
 - go
 - kubectl
+- skaffold
+- awscli
+- hashicorp/tap/terraform
+- hashicorp/tap/packer
 
 homebrew_cask_packages:
 - google-chrome
@@ -24,3 +32,4 @@ homebrew_cask_packages:
 - zoom
 - microsoft-teams
 - microsoft-office
+- evernote

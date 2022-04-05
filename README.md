@@ -1,13 +1,7 @@
-# Dotfiles: Configuration settings for tmux, neovim, and more
-     
-    These dot files are from @nicknisi and @hacker1db originally. Thanks for the rocking config, guys! 
-Copy and paste the following to Install my modified dotfiles I use solarzied Theme personally its easier on the eyes if you dont like it you can switch it 
-or type light in terminal to change it to a light version of solarized but it will switch it back in when you run 
-tmux I am working on trying to fix it but it will take time! 
+# Defilan's dotfiles: Configuration for MacOS Developer Systems     
 
-
-And most of all enjoy 
-and share your thoughts!  what works for me wont always work for you but smile and enjoy anyway! 
+## Usage:
+To use Defilan dotfiles, simply clone this repo into a directory of your choice on your Mac:
 
 
 

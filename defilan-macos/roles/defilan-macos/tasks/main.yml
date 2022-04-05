@@ -5,9 +5,9 @@
   homebrew:
     name: "{{ homebrew_packages }}"
 
-- name: Tap Cask Fonts
+- name: Add Extra Casks
   community.general.homebrew_tap:
-    name: homebrew/cask-fonts
+    name: "{{ homebrew_taps }}"
 
 - name: Install cask packages
   homebrew_cask:
