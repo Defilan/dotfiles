@@ -1,0 +1,36 @@
+---
+# tasks file for defilan-macos
+
+- name: Install brew packages 
+  homebrew:
+    name: "{{ homebrew_packages }}"
+
+- name: Tap Cask Fonts
+  community.general.homebrew_tap:
+    name: homebrew/cask-fonts
+
+- name: Install cask packages
+  homebrew_cask:
+    name: "{{ homebrew_cask_packages }}"
+
+- name: Installing oh-my-zsh
+  git:
+    repo: "https://github.com/robbyrussell/oh-my-zsh.git"
+    dest: "{{ ansible_env.HOME + '/.oh-my-zsh' }}"
+    update: yes
+  register: defilan_macos_git_result
+  changed_when: "defilan_macos_git_result.after|default('after') != defilan_macos_git_result.before|default('before')"
+
+- name: Configuring oh-my-zsh
+  template:
+    src: ".zshrc.j2"
+    dest: "{{ ansible_env.HOME + '/.zshrc' }}"
+    backup: yes
+
+- name: Installing ZSH Autosuggestion
+  git:
+    repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
+    dest: "{{ ansible_env.HOME + '/.oh-my-zsh/custom/plugins/zsh-autosuggestions' }}"
+    update: yes
+  register: defilan_macos_git_zshas_result
+  changed_when: "defilan_macos_git_zshas_result.after|default('after') != defilan_macos_git_zshas_result.before|default('before')"

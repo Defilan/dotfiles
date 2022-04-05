@@ -1,0 +1,7 @@
+# setup.yml
+---
+
+- hosts: localhost
+  connection: local
+  roles:
+  - defilan-macos

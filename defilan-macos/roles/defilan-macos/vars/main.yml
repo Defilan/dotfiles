@@ -1,0 +1,22 @@
+---
+# vars file for defilan-macos
+
+homebrew_packages:
+- neovim
+- tmux
+- git-extras
+- thefuck
+- neovim
+- go
+- kubectl
+
+homebrew_cask_packages:
+- google-chrome
+- iterm2
+- visual-studio-code
+- spotify
+- 1password
+- rectangle
+- font-hack-nerd-font
+- slack
+- jetbrains-toolbox
