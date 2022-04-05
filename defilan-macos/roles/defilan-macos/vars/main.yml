@@ -20,3 +20,7 @@ homebrew_cask_packages:
 - font-hack-nerd-font
 - slack
 - jetbrains-toolbox
+- nordvpn
+- zoom
+- microsoft-teams
+- microsoft-office
