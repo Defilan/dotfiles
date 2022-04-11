@@ -33,3 +33,7 @@ homebrew_cask_packages:
 - microsoft-teams
 - microsoft-office
 - evernote
+- microsoft-remote-desktop
+- switchresx
+- discord
+- istat-menus
