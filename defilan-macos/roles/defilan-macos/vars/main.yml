@@ -30,10 +30,10 @@ homebrew_cask_packages:
 - jetbrains-toolbox
 - nordvpn
 - zoom
-- microsoft-teams
 - microsoft-office
 - evernote
 - microsoft-remote-desktop
 - switchresx
 - discord
 - istat-menus
+- signal
