@@ -9,7 +9,7 @@ if [[ $(uname -m) == 'arm64' ]]; then
     fi
 else
     echo "Intel"
-    if [ ! -d "/usr/local" ]; then
+    if [ ! -d "/usr/local/Homebrew" ]; then
         install=1
     fi
 fi
