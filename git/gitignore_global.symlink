@@ -25,4 +25,4 @@ tscommand*.txt
 **/.terraform/*
 
 #JetBrains
-.idea
+.idea/*

@@ -4,6 +4,7 @@
 homebrew_taps:
 - hashicorp/tap
 - homebrew/cask-fonts
+- aws/tap
 
 homebrew_packages:
 - neovim
@@ -17,6 +18,8 @@ homebrew_packages:
 - awscli
 - hashicorp/tap/terraform
 - hashicorp/tap/packer
+- aws-sam-cli
+- node
 
 homebrew_cask_packages:
 - google-chrome
@@ -37,3 +40,5 @@ homebrew_cask_packages:
 - discord
 - istat-menus
 - signal
+- docker
+- postman
