@@ -20,6 +20,7 @@ homebrew_packages:
 - hashicorp/tap/packer
 - aws-sam-cli
 - node
+- redis
 
 homebrew_cask_packages:
 - google-chrome
