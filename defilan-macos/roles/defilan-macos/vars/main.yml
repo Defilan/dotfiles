@@ -37,3 +37,4 @@ homebrew_cask_packages:
 - docker
 - postman
 - gimp
+- obs
