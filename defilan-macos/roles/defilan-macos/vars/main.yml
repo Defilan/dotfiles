@@ -1,0 +1,47 @@
+---
+# vars file for defilan-macos
+
+homebrew_taps:
+- hashicorp/tap
+- homebrew/cask-fonts
+- aws/tap
+
+homebrew_packages:
+- neovim
+- tmux
+- git-extras
+- thefuck
+- go
+- kubectl
+- skaffold
+- awscli
+- hashicorp/tap/terraform
+- hashicorp/tap/packer
+- aws-sam-cli
+- node
+- redis
+- molecule
+
+homebrew_cask_packages:
+- arc
+- iterm2
+- visual-studio-code
+- 1password
+- rectangle
+- font-hack-nerd-font
+- jetbrains-toolbox
+- nordvpn
+- switchresx
+- discord
+- istat-menus
+- signal
+- docker
+- postman
+- gimp
+- obs
+- krisp
+
+defilan_directories:
+- ~/stuffy
+- ~/stuffy/code
+- ~/stuffy/playground
