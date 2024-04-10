@@ -1,0 +1,29 @@
+name: Ansible Lint
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  ansible-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install Ansible and ansible-lint
+        run: |
+          pip install ansible ansible-lint
+
+      - name: Run ansible-lint
+        run: ansible-lint defilan-macos/roles/defilan-macos
