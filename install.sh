@@ -11,6 +11,11 @@ if [ "$(uname)" == "Darwin" ]; then
     echo "Running on OSX"
     source install/brew.sh
     echo "Install Ansible..."
+    if [[ $(uname -m) == 'arm64' ]]; then
+        /opt/homebrew/bin/brew install ansible
+    else
+       /usr/local/Homebrew/bin/brew install ansible     
+    fi
     brew install ansible
     echo "Configuring Mac..."
     ansible-playbook defilan-macos/playbook.yml
