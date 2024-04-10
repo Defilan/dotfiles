@@ -16,7 +16,6 @@ if [ "$(uname)" == "Darwin" ]; then
     else
        /usr/local/Homebrew/bin/brew install ansible     
     fi
-    brew install ansible
     echo "Configuring Mac..."
     ansible-playbook defilan-macos/playbook.yml
 fi
