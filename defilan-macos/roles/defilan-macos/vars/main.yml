@@ -20,6 +20,7 @@ homebrew_packages:
 - aws-sam-cli
 - node
 - redis
+- molecule
 
 homebrew_cask_packages:
 - arc
