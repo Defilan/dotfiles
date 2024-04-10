@@ -11,7 +11,6 @@ homebrew_packages:
 - tmux
 - git-extras
 - thefuck
-- neovim
 - go
 - kubectl
 - skaffold
@@ -23,10 +22,9 @@ homebrew_packages:
 - redis
 
 homebrew_cask_packages:
-- google-chrome
+- arc
 - iterm2
 - visual-studio-code
-- spotify
 - 1password
 - rectangle
 - font-hack-nerd-font
@@ -34,9 +32,6 @@ homebrew_cask_packages:
 - jetbrains-toolbox
 - nordvpn
 - zoom
-- microsoft-office
-- evernote
-- microsoft-remote-desktop
 - switchresx
 - discord
 - istat-menus
