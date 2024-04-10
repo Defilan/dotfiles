@@ -7,8 +7,8 @@ This repository contains an Ansible playbook for setting up a MacOS development 
 To use this setup, clone this repository into a directory of your choice on your Mac:
 
 ```bash
-git clone https://github.com/defilan/macos-setup.git
-cd macos-setup
+git clone https://github.com/defilan/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
 bash install.sh
 ```
 
