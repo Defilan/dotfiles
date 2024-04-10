@@ -17,7 +17,11 @@ if [ "$(uname)" == "Darwin" ]; then
        /usr/local/Homebrew/bin/brew install ansible     
     fi
     echo "Configuring Mac..."
-    ansible-playbook defilan-macos/playbook.yml
+     if [[ $(uname -m) == 'arm64' ]]; then
+        /opt/homebrew/bin/ansible-playbook defilan-macos/playbook.yml
+    else
+       /usr/local/Homebrew/bin/ansible-playbook defilan-macos/playbook.yml    
+    fi    
 fi
 
 echo "creating vim directories"
