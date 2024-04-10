@@ -38,3 +38,9 @@ homebrew_cask_packages:
 - postman
 - gimp
 - obs
+- krisp
+
+defilan_directories:
+- ~/stuffy
+- ~/stuffy/code
+- ~/stuffy/playground

@@ -35,6 +35,16 @@
   register: defilan_macos_git_zshas_result
   changed_when: "defilan_macos_git_zshas_result.after|default('after') != defilan_macos_git_zshas_result.before|default('before')"
 
+- name: Create directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ ansible_user_id }}"
+    group: staff
+    mode: 0755
+  with_items:
+    - "{{ defilan_directories }}"
+
 # - name: Create a symbolic link
 #   ansible.builtin.file:
 #     src: /file/to/link/to
