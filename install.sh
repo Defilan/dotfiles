@@ -1,5 +1,11 @@
 #!bin/bash
 
+echo "Please choose a configuration:"
+echo "1) Lightweight (Essentials only)"
+echo "2) Developer/Engineering Config"
+echo "3) Productivity/Full Config"
+read -p "Enter the number of your choice: " config_choice
+
 case $config_choice in
   1)
     configtemplate="lightweight"
@@ -17,20 +23,13 @@ case $config_choice in
 esac
 
 export CONFIG=$configtemplate
+echo "You chose this configuration: $config_choice ($configtemplate)"
 
 echo "Installing dotfiles"
 source install/link.sh
 
 echo "eInitializing submodule(s)"
 git submodule update --init --recursive
-
-echo "Please choose a configuration:"
-echo "1) Lightweight (Essentials only)"
-echo "2) Developer/Engineering Config"
-echo "3) Productivity/Full Config"
-read -p "Enter the number of your choice: " config_choice
-
-echo "You chose this configuration: $config_choice ($configtemplate)"
 
 if [ "$(uname)" == "Darwin" ]; then
     echo "Running on OSX"
