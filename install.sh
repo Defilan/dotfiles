@@ -2,21 +2,21 @@
 
 case $config_choice in
   1)
-    config="lightweight"
+    configtemplate="lightweight"
     ;;
   2)
-    config="developer"
+    configtemplate="developer"
     ;;
   3)
-    config="home"
+    configtemplate="home"
     ;;
   *)
     echo "Invalid choice, defaulting to Bare Bones"
-    config="lightweight"
+    configtemplate="lightweight"
     ;;
 esac
 
-export CONFIG=$config
+export CONFIG=$configtemplate
 
 echo "Installing dotfiles"
 source install/link.sh
@@ -30,7 +30,7 @@ echo "2) Developer/Engineering Config"
 echo "3) Productivity/Full Config"
 read -p "Enter the number of your choice: " config_choice
 
-echo config_choice
+echo "You chose this configuration: $config_choice ($configtemplate)"
 
 if [ "$(uname)" == "Darwin" ]; then
     echo "Running on OSX"
