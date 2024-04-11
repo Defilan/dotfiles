@@ -43,9 +43,9 @@ if [ "$(uname)" == "Darwin" ]; then
     fi
     echo "Configuring Mac..."
      if [[ $(uname -m) == 'arm64' ]]; then
-        /opt/homebrew/bin/ansible-playbook defilan-macos/playbook.yml
+        /opt/homebrew/bin/ansible-playbook defilan-macos/playbook.yml -e "config=$configtemplate"
     else
-       /usr/local/Homebrew/bin/ansible-playbook defilan-macos/playbook.yml    
+       /usr/local/Homebrew/bin/ansible-playbook defilan-macos/playbook.yml -e "config=$configtemplate"
     fi    
 fi
 
