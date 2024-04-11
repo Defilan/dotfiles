@@ -17,11 +17,12 @@ case $config_choice in
 esac
 
 export CONFIG=$config
+echo CONFIG
 
 echo "Installing dotfiles"
 source install/link.sh
 
-echo "Initializing submodule(s)"
+echo "eInitializing submodule(s)"
 git submodule update --init --recursive
 
 echo "Please choose a configuration:"
