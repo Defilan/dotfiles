@@ -3,7 +3,7 @@
 echo "Checking/Installing Homebrew..."
 install=0
 if [[ $(uname -m) == 'arm64' ]]; then
-    echo "M1"
+    echo "Apple Silicon"
     if [ ! -d "/opt/homebrew" ]; then
         install=1
     fi

@@ -28,7 +28,7 @@ echo "You chose this configuration: $config_choice ($configtemplate)"
 echo "Installing dotfiles"
 source install/link.sh
 
-echo "eInitializing submodule(s)"
+echo "Initializing submodule(s)"
 git submodule update --init --recursive
 
 if [ "$(uname)" == "Darwin" ]; then
