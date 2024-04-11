@@ -1,17 +1,27 @@
 ---
 # tasks file for defilan-macos
 
+- name: Set config variable
+  set_fact:
+    config: "{{ lookup('env', 'config') }}"
+
 - name: Add Extra Casks
   community.general.homebrew_tap:
-    name: "{{ homebrew_taps }}"
+    name: "{{ item }}"
+  loop: "{{ config_packages[config].homebrew_taps }}"
+  when: config_packages[config].homebrew_taps is defined
 
 - name: Install brew packages 
   homebrew:
-    name: "{{ homebrew_packages }}"
+    name: "{{ item }}"
+  loop: "{{ config_packages[config].homebrew_packages }}"
+  when: config_packages[config].homebrew_packages is defined
 
 - name: Install cask packages
   homebrew_cask:
-    name: "{{ homebrew_cask_packages }}"
+    name: "{{ item }}"
+  loop: "{{ config_packages[config].homebrew_cask_packages }}"
+  when: config_packages[config].homebrew_cask_packages is defined
 
 - name: Installing oh-my-zsh
   git:
@@ -31,24 +41,3 @@
   git:
     repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
     dest: "{{ ansible_env.HOME + '/.oh-my-zsh/custom/plugins/zsh-autosuggestions' }}"
-    update: yes
-  register: defilan_macos_git_zshas_result
-  changed_when: "defilan_macos_git_zshas_result.after|default('after') != defilan_macos_git_zshas_result.before|default('before')"
-
-- name: Create directories
-  ansible.builtin.file:
-    path: "{{ item }}"
-    state: directory
-    owner: "{{ ansible_user_id }}"
-    group: staff
-    mode: 0755
-  with_items:
-    - "{{ defilan_directories }}"
-
-# - name: Create a symbolic link
-#   ansible.builtin.file:
-#     src: /file/to/link/to
-#     dest: /path/to/symlink
-#     owner: foo
-#     group: foo
-#     state: link
