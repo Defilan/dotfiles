@@ -12,7 +12,15 @@ cd ~/.dotfiles
 bash install.sh
 ```
 
-### Install Script
+### Choose a desired configuration template
+
+```bash
+Please choose a configuration:
+1) Lightweight (Essentials only)
+2) Developer/Engineering Config
+3) Productivity/Full Config
+Enter the number of your choice:
+```
 
 The `install.sh` script performs the following actions:
 
@@ -26,7 +34,7 @@ The `install.sh` script performs the following actions:
 1. Taps into several Homebrew repositories, including HashiCorp, AWS, and Homebrew's own font cask.
 2. Installs a variety of Homebrew packages, including `neovim`, `tmux`, `git-extras`, `thefuck`, `go`, `kubectl`, `skaffold`, `awscli`, `terraform`, `packer`, `aws-sam-cli`, `node`, `redis`, and `molecule`.
 3. Installs several Homebrew cask packages, including `arc`, `iterm2`, `visual-studio-code`, `1password`, `rectangle`, `font-hack-nerd-font`, `jetbrains-toolbox`, `nordvpn`, `switchresx`, `discord`, `istat-menus`, `signal`, `docker`, `postman`, `gimp`, `obs`, and `krisp`.
-4 . Creates directories at `~/stuffy`, `~/stuffy/code`, and `~/stuffy/playground`.
+4. Creates directories at `~/stuffy`, `~/stuffy/code`, and `~/stuffy/playground`.
 
 ## Notes
 
