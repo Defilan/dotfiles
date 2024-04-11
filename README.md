@@ -22,6 +22,12 @@ Please choose a configuration:
 Enter the number of your choice:
 ```
 
+### Enter your git config information
+```bash
+Enter your git username: Your name
+Enter your git email: Your email address
+```
+
 The `install.sh` script performs the following actions:
 
 - Checks if Homebrew is installed and installs it if not.
