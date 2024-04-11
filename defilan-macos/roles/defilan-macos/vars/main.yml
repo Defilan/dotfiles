@@ -2,14 +2,14 @@
 # vars file for defilan-macos
 
 config_packages:
-  config1:
+  lightweight:
     homebrew_cask_packages:
       - arc
       - iterm2
       - 1password
       - rectangle
       - istat-menus
-  config2:
+  developer:
     homebrew_taps:
       - hashicorp/tap
       - homebrew/cask-fonts
@@ -42,7 +42,7 @@ config_packages:
       - docker
       - postman
       - obs
-  config3:
+  home:
     homebrew_taps:
       - hashicorp/tap
       - homebrew/cask-fonts
