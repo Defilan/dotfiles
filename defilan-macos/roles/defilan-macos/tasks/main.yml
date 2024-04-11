@@ -1,17 +1,27 @@
 ---
 # tasks file for defilan-macos
 
+- name: Set config variable
+  set_fact:
+    config: "{{ lookup('env', 'config') }}"
+
 - name: Add Extra Casks
   community.general.homebrew_tap:
-    name: "{{ homebrew_taps }}"
+    name: "{{ item }}"
+  loop: "{{ config_packages[config].homebrew_taps }}"
+  when: config_packages[config].homebrew_taps is defined
 
 - name: Install brew packages 
   homebrew:
     name: "{{ homebrew_packages }}"
+  loop: "{{ config_packages[config].homebrew_packages }}"
+  when: config_packages[config].homebrew_packages is defined
 
 - name: Install cask packages
   homebrew_cask:
     name: "{{ homebrew_cask_packages }}"
+  loop: "{{ config_packages[config].homebrew_cask_packages }}"
+  when: config_packages[config].homebrew_cask_packages is defined
 
 - name: Installing oh-my-zsh
   git:
