@@ -25,6 +25,13 @@ esac
 export CONFIG=$configtemplate
 echo "You chose this configuration: $config_choice ($configtemplate)"
 
+# Prompt the user for their git username and email
+read -p "Enter your git username: " git_username
+read -p "Enter your git email: " git_email
+
+# Replace the placeholders in the gitconfig file with the user's git username and email
+sed -e "s/GIT_USERNAME/$git_username/g" -e "s/GIT_EMAIL/$git_email/g" git/gitconfig.symlink.template > git/gitconfig.symlink
+
 echo "Installing dotfiles"
 source install/link.sh
 
