@@ -29,6 +29,7 @@ config_packages:
       - node
       - redis
       - molecule
+      - battery
     homebrew_cask_packages:
       - arc
       - iterm2
@@ -62,6 +63,7 @@ config_packages:
       - node
       - redis
       - molecule
+      - battery
     homebrew_cask_packages:
       - arc
       - iterm2
