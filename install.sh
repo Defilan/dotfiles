@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 echo "Please choose a configuration:"
 echo "1) Lightweight (Essentials only)"
