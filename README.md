@@ -1,3 +1,4 @@
+[![Shell Lint](https://github.com/Defilan/dotfiles/actions/workflows/shell_lint.yml/badge.svg)](https://github.com/Defilan/dotfiles/actions/workflows/shell_lint.yml)
 # Defilan's Dotfiles for MacOS
 
 This repository contains an Ansible playbook for setting up a MacOS development environment. It installs Homebrew, Ansible, and a variety of applications and customizations.
