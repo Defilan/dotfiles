@@ -1,51 +1,51 @@
 #!/usr/bin/env bash
 
-DOTFILES=$HOME/.dotfiles
+DOTFILES="$HOME/.dotfiles"
 
-echo -e "\nCreating symlinks"
-echo "=============================="
-linkables=$( find -H "$DOTFILES" -maxdepth 3 -name '*.symlink' )
+printf "\nCreating symlinks\n"
+printf "==============================\n"
+linkables=$(find -H "$DOTFILES" -maxdepth 3 -name '*.symlink')
 for file in $linkables ; do
-    target="$HOME/.$( basename $file '.symlink' )"
-    if [ -e $target ]; then
-        echo "~${target#$HOME} already exists... Skipping."
+    target="$HOME/.$(basename "$file" '.symlink')"
+    if [ -e "$target" ]; then
+        printf "~%s already exists... Skipping.\n" "${target#"$HOME"}"
     else
-        echo "Creating symlink for $file"
-        ln -s $file $target
+        printf "Creating symlink for %s\n" "$file"
+        ln -s "$file" "$target"
     fi
 done
 
-echo -e "\n\ninstalling to ~/.config"
-echo "=============================="
-if [ ! -d $HOME/.config ]; then
-    echo "Creating ~/.config"
-    mkdir -p $HOME/.config
+printf "\n\ninstalling to ~/.config\n"
+printf "==============================\n"
+if [ ! -d "$HOME/.config" ]; then
+    printf "Creating ~/.config\n"
+    mkdir -p "$HOME/.config"
 fi
-# configs=$( find -path "$DOTFILES/config.symlink" -maxdepth 1 )
-for config in $DOTFILES/config/*; do
-    target=$HOME/.config/$( basename $config )
-    if [ -e $target ]; then
-        echo "~${target#$HOME} already exists... Skipping."
+for config in "$DOTFILES/config/"*; do
+    target="$HOME/.config/$(basename "$config")"
+    if [ -e "$target" ]; then
+        printf "~%s already exists... Skipping.\n" "${target#"$HOME"}"
     else
-        echo "Creating symlink for $config"
-        ln -s $config $target
+        printf "Creating symlink for %s\n" "$config"
+        ln -s "$config" "$target"
     fi
 done
 
-# create vim symlinks
+printf "\n\nCreating vim symlinks\n"
+printf "==============================\n"
 
-echo -e "\n\nCreating vim symlinks"
-echo "=============================="
+#!/usr/bin/env bash
 
-typeset -A vimfiles
-vimfiles[~/.vim]=$DOTFILES/config/nvim
-vimfiles[~/.vimrc]=$DOTFILES/config/nvim/init.vim
+vimfiles_keys=(~/.vim ~/.vimrc)
+vimfiles_values=("$DOTFILES/config/nvim" "$DOTFILES/config/nvim/init.vim")
 
-for file in "${!vimfiles[@]}"; do
-    if [ -e ${file} ]; then
-        echo "${file} already exists... skipping"
+for index in "${!vimfiles_keys[@]}"; do
+    file="${vimfiles_keys[index]}"
+    value="${vimfiles_values[index]}"
+    if [ -e "$file" ]; then
+        printf "%s already exists... skipping\n" "$file"
     else
-        echo "Creating symlink for $file"
-        ln -s ${vimfiles[$file]} $file
+        printf "Creating symlink for %s\n" "$file"
+        ln -s "$value" "$file"
     fi
 done

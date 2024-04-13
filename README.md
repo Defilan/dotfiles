@@ -9,7 +9,7 @@ To use this setup, clone this repository into a directory of your choice on your
 ```bash
 git clone https://github.com/defilan/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
-bash install.sh
+./install.sh
 ```
 
 ### Choose a desired configuration template

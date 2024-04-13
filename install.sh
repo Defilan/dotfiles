@@ -1,10 +1,10 @@
-#!bin/bash
+#!/usr/bin/env bash
 
 echo "Please choose a configuration:"
 echo "1) Lightweight (Essentials only)"
 echo "2) Developer/Engineering Config"
 echo "3) Productivity/Full Config"
-read -p "Enter the number of your choice: " config_choice
+read -rp "Enter the number of your choice: " config_choice
 
 case $config_choice in
   1)
@@ -26,8 +26,8 @@ export CONFIG=$configtemplate
 echo "You chose this configuration: $config_choice ($configtemplate)"
 
 # Prompt the user for their git username and email
-read -p "Enter your git username: " git_username
-read -p "Enter your git email: " git_email
+read -rp "Enter your git username: " git_username
+read -rp "Enter your git email: " git_email
 
 # Replace the placeholders in the gitconfig file with the user's git username and email
 sed -e "s/GIT_USERNAME/$git_username/g" -e "s/GIT_EMAIL/$git_email/g" git/gitconfig.symlink.template > git/gitconfig.symlink
