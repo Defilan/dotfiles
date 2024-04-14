@@ -14,6 +14,7 @@ config_packages:
       - hashicorp/tap
       - homebrew/cask-fonts
       - aws/tap
+      - twilio/brew
     homebrew_packages:
       - neovim
       - tmux
@@ -30,6 +31,7 @@ config_packages:
       - redis
       - molecule
       - battery
+      - twilio
     homebrew_cask_packages:
       - arc
       - iterm2
@@ -48,6 +50,7 @@ config_packages:
       - hashicorp/tap
       - homebrew/cask-fonts
       - aws/tap
+      - twilio/brew
     homebrew_packages:
       - neovim
       - tmux
@@ -64,6 +67,7 @@ config_packages:
       - redis
       - molecule
       - battery
+      - twilio
     homebrew_cask_packages:
       - arc
       - iterm2
