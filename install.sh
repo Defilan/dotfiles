@@ -1,9 +1,16 @@
 #!/usr/bin/env bash
-
+# Display ASCII art
+cat << "EOF"
+   ___      ____ __         _        ___       __  ____ __      
+  / _ \___ / _(_) /__ ____ ( )___   / _ \___  / /_/ _(_) /__ ___
+ / // / -_) _/ / / _ `/ _ \|/(_-<  / // / _ \/ __/ _/ / / -_|_-<
+/____/\__/_//_/_/\_,_/_//_/ /___/ /____/\___/\__/_//_/_/\__/___/                                                                      
+EOF
 echo "Please choose a configuration:"
 echo "1) Lightweight (Essentials only)"
 echo "2) Developer/Engineering Config"
 echo "3) Productivity/Full Config"
+echo "4) Quit"
 read -rp "Enter the number of your choice: " config_choice
 
 case $config_choice in
@@ -16,6 +23,9 @@ case $config_choice in
   3)
     configtemplate="home"
     ;;
+  4)
+    exit 0
+    ;;
   *)
     echo "Invalid choice, defaulting to Bare Bones"
     configtemplate="lightweight"
@@ -25,12 +35,8 @@ esac
 export CONFIG=$configtemplate
 echo "You chose this configuration: $config_choice ($configtemplate)"
 
-# Prompt the user for their git username and email
-read -rp "Enter your git username: " git_username
-read -rp "Enter your git email: " git_email
-
-# Replace the placeholders in the gitconfig file with the user's git username and email
-sed -e "s/GIT_USERNAME/$git_username/g" -e "s/GIT_EMAIL/$git_email/g" git/gitconfig.symlink.template > git/gitconfig.symlink
+echo "Configuring Git"
+source install/git.sh
 
 echo "Installing dotfiles"
 source install/link.sh

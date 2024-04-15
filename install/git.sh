@@ -3,7 +3,8 @@
 # Check if user.name and user.email are set in the existing gitconfig
 git_username=$(git config --get user.name)
 git_email=$(git config --get user.email)
-echo $git_username
+echo "Your system's git username is: $git_username"
+echo "Your system's git email is: $git_email"
 
 
 # If user.name or user.email are not set, prompt the user for their git username and email
