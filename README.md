@@ -20,10 +20,11 @@ Please choose a configuration:
 1) Lightweight (Essentials only)
 2) Developer/Engineering Config
 3) Productivity/Full Config
+4) Quit
 Enter the number of your choice:
 ```
 
-### Enter your git config information
+### Enter your git config information if missing
 ```bash
 Enter your git username: Your name
 Enter your git email: Your email address
