@@ -32,6 +32,8 @@ config_packages:
       - molecule
       - battery
       - twilio
+      - exercism
+      - yarn
     homebrew_cask_packages:
       - arc
       - iterm2
@@ -68,6 +70,8 @@ config_packages:
       - molecule
       - battery
       - twilio
+      - exercism
+      - yarn
     homebrew_cask_packages:
       - arc
       - iterm2
