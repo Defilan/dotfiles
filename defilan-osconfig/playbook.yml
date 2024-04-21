@@ -4,4 +4,4 @@
 - hosts: localhost
   connection: local
   roles:
-  - defilan-macos
+  - defilan-osconfig
