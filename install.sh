@@ -58,7 +58,13 @@ if [ "$(uname)" == "Darwin" ]; then
         /opt/homebrew/bin/ansible-playbook defilan-osconfig/playbook.yml -e "config=$configtemplate"
     else
        /usr/local/Homebrew/bin/ansible-playbook defilan-osconfig/playbook.yml -e "config=$configtemplate"
-    fi    
+    fi
+  elseif [ "$(uname)" == "Linux" ]; then
+    echo "Running on Linux"
+    echo "Install Ansible..."
+    sudo apt-get install ansible
+    echo "Configuring Linux..."
+    ansible-playbook defilan-osconfig/playbook.yml -e "config=$configtemplate"
 fi
 
 echo "creating vim directories"
