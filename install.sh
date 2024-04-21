@@ -59,7 +59,7 @@ if [ "$(uname)" == "Darwin" ]; then
     else
        /usr/local/Homebrew/bin/ansible-playbook defilan-osconfig/playbook.yml -e "config=$configtemplate"
     fi
-  elseif [ "$(uname)" == "Linux" ]; then
+  elif [ "$(uname)" == "Linux" ]; then
     echo "Running on Linux"
     echo "Install Ansible..."
     sudo apt-get install ansible
