@@ -48,6 +48,12 @@ config_packages:
       - postman
       - obs
       - font-dejavu-sans-mono-nerd-font
+    apt_packages:
+      - neovim
+      - tmux
+      - git-extras
+      - thefuck
+      - go
   home:
     homebrew_taps:
       - hashicorp/tap
@@ -92,7 +98,13 @@ config_packages:
       - obs
       - krisp
       - font-dejavu-sans-mono-nerd-font
-
+      - microsoft-office
+    apt_packages:
+      - neovim
+      - tmux
+      - git-extras
+      - thefuck
+      - go
 defilan_directories:
 - ~/stuffy
 - ~/stuffy/code

@@ -32,7 +32,14 @@
   become: yes
   when: ansible_os_family == 'Debian'
 
+- name: Install apt packages
+  apt:
+    name: "{{ item }}"
+  loop: "{{ config_packages[config].apt_packages }}"
+  become: yes
+  when: ansible_os_family == 'Debian' and config_packages[config].apt_packages is defined
 
+  # Configure ZSH and directories
 
 - name: Create stuffy directory
   file:
@@ -46,7 +53,7 @@
   loop:
     - code
     - playground
-
+  
 - name: Installing oh-my-zsh
   git:
     repo: "https://github.com/robbyrussell/oh-my-zsh.git"
