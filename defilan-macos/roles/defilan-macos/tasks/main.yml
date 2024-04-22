@@ -23,6 +23,20 @@
   loop: "{{ config_packages[config].homebrew_cask_packages }}"
   when: config_packages[config].homebrew_cask_packages is defined
 
+
+- name: Create stuffy directory
+  file:
+    path: "{{ ansible_env.HOME }}/stuffy"
+    state: directory
+
+- name: Create subdirectories
+  file:
+    path: "{{ ansible_env.HOME }}/stuffy/{{ item }}"
+    state: directory
+  loop:
+    - code
+    - playground
+
 - name: Installing oh-my-zsh
   git:
     repo: "https://github.com/robbyrussell/oh-my-zsh.git"

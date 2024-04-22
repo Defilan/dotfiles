@@ -47,6 +47,7 @@ config_packages:
       - docker
       - postman
       - obs
+      - font-dejavu-sans-mono-nerd-font
   home:
     homebrew_taps:
       - hashicorp/tap
@@ -90,7 +91,7 @@ config_packages:
       - gimp
       - obs
       - krisp
-      - microsoft-office
+      - font-dejavu-sans-mono-nerd-font
 
 defilan_directories:
 - ~/stuffy
