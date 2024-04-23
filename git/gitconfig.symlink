@@ -1,8 +1,8 @@
 
 # gitconfig
 [user]
-	name = Christopher P. Maher
-	email = chris@mahercode.io
+	name = 
+	email = 
 [github]
     user =  
 [init]
