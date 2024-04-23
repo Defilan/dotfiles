@@ -54,6 +54,35 @@
     - code
     - playground
   
+- name: Download Go tar
+  get_url:
+    url: "https://dl.google.com/go/go{{ go_version }}.linux-amd64.tar.gz"
+    dest: "/tmp/go{{ go_version }}.linux-amd64.tar.gz"
+  become: yes
+  when: ansible_os_family == 'Debian'
+
+- name: Extract Go tar
+  unarchive:
+    src: "/tmp/go{{ go_version }}.linux-amd64.tar.gz"
+    dest: "/usr/local"
+    remote_src: yes
+  become: yes
+  when: ansible_os_family == 'Debian'
+
+- name: Add Go to PATH
+  lineinfile:
+    path: /etc/profile
+    line: 'export PATH=$PATH:/usr/local/go/bin'
+  become: yes
+  when: ansible_os_family == 'Debian'
+
+- name: Set ZSH as the default shell
+  user:
+    name: "{{ ansible_env.USER }}"
+    shell: /bin/zsh
+  become: yes
+  when: ansible_os_family == 'Debian'
+
 - name: Installing oh-my-zsh
   git:
     repo: "https://github.com/robbyrussell/oh-my-zsh.git"

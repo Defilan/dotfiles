@@ -1,5 +1,6 @@
 ---
 # vars file for defilan-macos
+go_version: 1.22.2
 
 config_packages:
   lightweight:
