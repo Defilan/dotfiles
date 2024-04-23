@@ -55,10 +55,16 @@ if [ "$(uname)" == "Darwin" ]; then
     fi
     echo "Configuring Mac..."
      if [[ $(uname -m) == 'arm64' ]]; then
-        /opt/homebrew/bin/ansible-playbook defilan-macos/playbook.yml -e "config=$configtemplate"
+        /opt/homebrew/bin/ansible-playbook defilan-osconfig/playbook.yml -e "config=$configtemplate"
     else
-       /usr/local/Homebrew/bin/ansible-playbook defilan-macos/playbook.yml -e "config=$configtemplate"
-    fi    
+       /usr/local/Homebrew/bin/ansible-playbook defilan-osconfig/playbook.yml -e "config=$configtemplate"
+    fi
+  elif [ "$(uname)" == "Linux" ]; then
+    echo "Running on Linux"
+    echo "Install Ansible..."
+    sudo apt-get install ansible
+    echo "Configuring Linux..."
+    ansible-playbook defilan-osconfig/playbook.yml -e "config=$configtemplate"
 fi
 
 echo "creating vim directories"

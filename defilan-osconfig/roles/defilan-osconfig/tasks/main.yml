@@ -9,20 +9,37 @@
   community.general.homebrew_tap:
     name: "{{ item }}"
   loop: "{{ config_packages[config].homebrew_taps }}"
-  when: config_packages[config].homebrew_taps is defined
+  when: ansible_os_family == 'Darwin' and config_packages[config].homebrew_taps is defined
+
 
 - name: Install brew packages 
   homebrew:
     name: "{{ item }}"
   loop: "{{ config_packages[config].homebrew_packages }}"
-  when: config_packages[config].homebrew_packages is defined
+  when: ansible_os_family == 'Darwin' and config_packages[config].homebrew_packages is defined
 
 - name: Install cask packages
   homebrew_cask:
     name: "{{ item }}"
   loop: "{{ config_packages[config].homebrew_cask_packages }}"
-  when: config_packages[config].homebrew_cask_packages is defined
+  when: ansible_os_family == 'Darwin' and config_packages[config].homebrew_cask_packages is defined
 
+# Debian specific tasks
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+  become: yes
+  when: ansible_os_family == 'Debian'
+
+- name: Install apt packages
+  apt:
+    name: "{{ item }}"
+  loop: "{{ config_packages[config].apt_packages }}"
+  become: yes
+  when: ansible_os_family == 'Debian' and config_packages[config].apt_packages is defined
+
+  # Configure ZSH and directories
 
 - name: Create stuffy directory
   file:
@@ -36,6 +53,35 @@
   loop:
     - code
     - playground
+  
+- name: Download Go tar
+  get_url:
+    url: "https://dl.google.com/go/go{{ go_version }}.linux-amd64.tar.gz"
+    dest: "/tmp/go{{ go_version }}.linux-amd64.tar.gz"
+  become: yes
+  when: ansible_os_family == 'Debian'
+
+- name: Extract Go tar
+  unarchive:
+    src: "/tmp/go{{ go_version }}.linux-amd64.tar.gz"
+    dest: "/usr/local"
+    remote_src: yes
+  become: yes
+  when: ansible_os_family == 'Debian'
+
+- name: Add Go to PATH
+  lineinfile:
+    path: /etc/profile
+    line: 'export PATH=$PATH:/usr/local/go/bin'
+  become: yes
+  when: ansible_os_family == 'Debian'
+
+- name: Set ZSH as the default shell
+  user:
+    name: "{{ ansible_env.USER }}"
+    shell: /bin/zsh
+  become: yes
+  when: ansible_os_family == 'Debian'
 
 - name: Installing oh-my-zsh
   git:
