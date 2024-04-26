@@ -40,9 +40,17 @@ The `install.sh` script performs the following actions:
 #### The Ansible playbook installs a variety of applications and performs some customizations to the MacOS or Debian environment. Here's a brief overview:
 
 1. Taps into several Homebrew repositories, including HashiCorp, AWS, and Homebrew's own font cask.
-2. Installs a variety of Homebrew packages, including `neovim`, `tmux`, `git-extras`, `thefuck`, `go`, `kubectl`, `skaffold`, `awscli`, `terraform`, `packer`, `aws-sam-cli`, `node`, `redis`, and `molecule`.
-3. Installs several Homebrew cask packages, including `arc`, `iterm2`, `visual-studio-code`, `1password`, `rectangle`, `font-hack-nerd-font`, `jetbrains-toolbox`, `nordvpn`, `switchresx`, `discord`, `istat-menus`, `signal`, `docker`, `postman`, `gimp`, `obs`, and `krisp`.
-4. Creates directories at `~/stuffy`, `~/stuffy/code`, and `~/stuffy/playground`.
+
+#### For MacOS:
+
+- Installs a variety of Homebrew packages, including `neovim`, `tmux`, `git-extras`, `thefuck`, `go`, `kubectl`, `skaffold`, `awscli`, `terraform`, `packer`, `aws-sam-cli`, `node`, `redis`, and `molecule`.
+- Installs several Homebrew cask packages, including `arc`, `iterm2`, `visual-studio-code`, `1password`, `rectangle`, `font-hack-nerd-font`, `jetbrains-toolbox`, `nordvpn`, `switchresx`, `discord`, `istat-menus`, `signal`, `docker`, `postman`, `gimp`, `obs`, and `krisp`.
+
+#### For Debian:
+
+- Installs a variety of packages using the package manager, including `neovim`, `tmux`, `git-extras`, `thefuck`, `go`, `kubectl`, `skaffold`, `awscli`, `terraform`, `packer`, `aws-sam-cli`, `node`, `redis`, and `molecule`.
+
+2. Creates directories at `~/stuffy`, `~/stuffy/code`, and `~/stuffy/playground`.
 
 ## Notes
 
