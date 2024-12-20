@@ -47,7 +47,7 @@ config_packages:
       - docker
       - postman
       - obs
-      - font-dejavu-sans-mono-nerd-font
+      - cursor
     apt_packages:
       - neovim
       - tmux
@@ -97,8 +97,8 @@ config_packages:
       - gimp
       - obs
       - krisp
-      - font-dejavu-sans-mono-nerd-font
       - microsoft-office
+      - cursor
     apt_packages:
       - neovim
       - tmux
