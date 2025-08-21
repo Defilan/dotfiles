@@ -37,20 +37,34 @@ The `install.sh` script performs the following actions:
 - Runs the Ansible playbook contained in this repository.
 
 ### What does the Ansible playbook do?
-#### The Ansible playbook installs a variety of applications and performs some customizations to the MacOS or Debian environment. Here's a brief overview:
 
-1. Taps into several Homebrew repositories, including HashiCorp, AWS, and Homebrew's own font cask.
+The Ansible playbook installs a variety of applications and performs customizations to the MacOS or Debian environment. The packages are organized efficiently with shared packages common across configurations and configuration-specific additions.
 
-#### For MacOS:
+#### Package Organization
 
-- Installs a variety of Homebrew packages, including `neovim`, `tmux`, `git-extras`, `thefuck`, `go`, `kubectl`, `skaffold`, `awscli`, `terraform`, `packer`, `aws-sam-cli`, `node`, `redis`, and `molecule`.
-- Installs several Homebrew cask packages, including `arc`, `iterm2`, `visual-studio-code`, `1password`, `rectangle`, `font-hack-nerd-font`, `jetbrains-toolbox`, `nordvpn`, `switchresx`, `discord`, `istat-menus`, `signal`, `docker`, `postman`, `gimp`, `obs`, and `krisp`.
+**Shared Packages** (installed in both Developer and Home configurations):
+- **Homebrew Taps**: `aws/tap`, `hashicorp/tap`, `twilio/brew`
+- **Homebrew Packages**: `aws-sam-cli`, `awscli`, `battery`, `exercism`, `git-extras`, `go`, `hashicorp/tap/packer`, `hashicorp/tap/terraform`, `kubectl`, `molecule`, `neovim`, `node`, `redis`, `skaffold`, `thefuck`, `tmux`, `twilio`, `yarn`
+- **Homebrew Cask Packages**: `1password`, `arc`, `cursor`, `docker`, `font-hack-nerd-font`, `ghostty`, `istat-menus`, `iterm2`, `jetbrains-toolbox`, `obs`, `postman`, `rectangle`, `switchresx`, `visual-studio-code`
+- **APT Packages** (Debian): `git-extras`, `golang-go`, `neovim`, `thefuck`, `tmux`, `zsh`
 
-#### For Debian:
+#### Configuration-Specific Packages
 
-- Installs a variety of packages using the package manager, including `neovim`, `tmux`, `git-extras`, `thefuck`, `go`, `kubectl`, `skaffold`, `awscli`, `terraform`, `packer`, `aws-sam-cli`, `node`, `redis`, and `molecule`.
+**Lightweight Configuration** (Essentials only):
+- **Homebrew Cask Packages**: `1password`, `arc`, `istat-menus`, `iterm2`, `rectangle`
 
-2. Creates directories at `~/stuffy`, `~/stuffy/code`, and `~/stuffy/playground`.
+**Developer Configuration** (Clean development environment):
+- **Additional Packages**: None (uses shared packages only)
+
+**Home Configuration** (Full productivity setup):
+- **Additional Homebrew Cask Packages**: `discord`, `gimp`, `krisp`, `microsoft-office`, `nordvpn`, `signal`
+
+#### Additional Features
+
+1. **Directory Structure**: Creates directories at `~/stuffy`, `~/stuffy/code`, and `~/stuffy/playground`
+2. **Shell Configuration**: Sets up ZSH with Oh My Zsh and autosuggestions
+3. **Go Installation**: Installs Go 1.22.2 on Debian systems
+4. **Git Configuration**: Sets up global git configuration
 
 ## Notes
 

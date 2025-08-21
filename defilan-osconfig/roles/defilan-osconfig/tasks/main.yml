@@ -1,28 +1,40 @@
 ---
 # tasks file for defilan-macos
 
-- name: Set config variable
+- name: Set config variable with default
   set_fact:
-    config: "{{ lookup('env', 'config') }}"
+    config: "{{ config | default('home') }}"
+
+- name: Display selected config
+  debug:
+    msg: "Using config: {{ config }}"
+
+- name: Validate config variable
+  fail:
+    msg: "Invalid config '{{ config }}'. Valid options are: {{ config_packages.keys() | list }}"
+  when: config not in config_packages
+
+- name: Merge shared and config-specific packages
+  set_fact:
+    merged_packages: "{{ shared_packages | combine(config_packages[config], recursive=true) }}"
 
 - name: Add Extra Casks
   community.general.homebrew_tap:
     name: "{{ item }}"
-  loop: "{{ config_packages[config].homebrew_taps }}"
-  when: ansible_os_family == 'Darwin' and config_packages[config].homebrew_taps is defined
-
+  loop: "{{ merged_packages.homebrew_taps }}"
+  when: ansible_os_family == 'Darwin' and merged_packages.homebrew_taps is defined
 
 - name: Install brew packages 
   homebrew:
     name: "{{ item }}"
-  loop: "{{ config_packages[config].homebrew_packages }}"
-  when: ansible_os_family == 'Darwin' and config_packages[config].homebrew_packages is defined
+  loop: "{{ merged_packages.homebrew_packages }}"
+  when: ansible_os_family == 'Darwin' and merged_packages.homebrew_packages is defined
 
 - name: Install cask packages
   homebrew_cask:
     name: "{{ item }}"
-  loop: "{{ config_packages[config].homebrew_cask_packages }}"
-  when: ansible_os_family == 'Darwin' and config_packages[config].homebrew_cask_packages is defined
+  loop: "{{ merged_packages.homebrew_cask_packages }}"
+  when: ansible_os_family == 'Darwin' and merged_packages.homebrew_cask_packages is defined
 
 # Debian specific tasks
 
@@ -35,9 +47,9 @@
 - name: Install apt packages
   apt:
     name: "{{ item }}"
-  loop: "{{ config_packages[config].apt_packages }}"
+  loop: "{{ merged_packages.apt_packages }}"
   become: yes
-  when: ansible_os_family == 'Debian' and config_packages[config].apt_packages is defined
+  when: ansible_os_family == 'Debian' and merged_packages.apt_packages is defined
 
   # Configure ZSH and directories
 

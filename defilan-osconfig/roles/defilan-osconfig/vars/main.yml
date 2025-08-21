@@ -2,110 +2,78 @@
 # vars file for defilan-macos
 go_version: 1.22.2
 
+# Shared packages that are common across all configurations
+shared_packages:
+  homebrew_taps:
+    - aws/tap
+    - hashicorp/tap
+    - twilio/brew
+  
+  homebrew_packages:
+    - aws-sam-cli
+    - awscli
+    - battery
+    - exercism
+    - git-extras
+    - go
+    - hashicorp/tap/packer
+    - hashicorp/tap/terraform
+    - kubectl
+    - molecule
+    - neovim
+    - node
+    - redis
+    - skaffold
+    - thefuck
+    - tmux
+    - twilio
+    - yarn
+  
+  homebrew_cask_packages:
+    - 1password
+    - arc
+    - cursor
+    - docker
+    - font-hack-nerd-font
+    - ghostty
+    - istat-menus
+    - iterm2
+    - jetbrains-toolbox
+    - obs
+    - postman
+    - rectangle
+    - switchresx
+    - visual-studio-code
+  
+  apt_packages:
+    - git-extras
+    - golang-go
+    - neovim
+    - thefuck
+    - tmux
+    - zsh
+
+# Configuration-specific package additions
 config_packages:
   lightweight:
     homebrew_cask_packages:
-      - arc
-      - iterm2
       - 1password
-      - rectangle
-      - istat-menus
-  developer:
-    homebrew_taps:
-      - hashicorp/tap
-      - aws/tap
-      - twilio/brew
-    homebrew_packages:
-      - neovim
-      - tmux
-      - git-extras
-      - thefuck
-      - go
-      - kubectl
-      - skaffold
-      - awscli
-      - hashicorp/tap/terraform
-      - hashicorp/tap/packer
-      - aws-sam-cli
-      - node
-      - redis
-      - molecule
-      - battery
-      - twilio
-      - exercism
-      - yarn
-    homebrew_cask_packages:
       - arc
-      - iterm2
-      - visual-studio-code
-      - 1password
-      - rectangle
-      - font-hack-nerd-font
-      - jetbrains-toolbox
-      - switchresx
       - istat-menus
-      - docker
-      - postman
-      - obs
-      - cursor
-    apt_packages:
-      - neovim
-      - tmux
-      - git-extras
-      - thefuck
-      - zsh
-      - golang-go
+      - iterm2
+      - rectangle
+  
+  developer: {}
+  
   home:
-    homebrew_taps:
-      - hashicorp/tap
-      - aws/tap
-      - twilio/brew
-    homebrew_packages:
-      - neovim
-      - tmux
-      - git-extras
-      - thefuck
-      - go
-      - kubectl
-      - skaffold
-      - awscli
-      - hashicorp/tap/terraform
-      - hashicorp/tap/packer
-      - aws-sam-cli
-      - node
-      - redis
-      - molecule
-      - battery
-      - twilio
-      - exercism
-      - yarn
     homebrew_cask_packages:
-      - arc
-      - iterm2
-      - visual-studio-code
-      - 1password
-      - rectangle
-      - font-hack-nerd-font
-      - jetbrains-toolbox
-      - nordvpn
-      - switchresx
       - discord
-      - istat-menus
-      - signal
-      - docker
-      - postman
       - gimp
-      - obs
       - krisp
       - microsoft-office
-      - cursor
-    apt_packages:
-      - neovim
-      - tmux
-      - git-extras
-      - thefuck
-      - zsh
-      - golang-go
+      - nordvpn
+      - signal
+
 defilan_directories:
 - ~/stuffy
 - ~/stuffy/code
