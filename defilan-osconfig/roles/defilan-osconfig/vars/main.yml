@@ -1,6 +1,6 @@
 ---
 # vars file for defilan-macos
-go_version: 1.22.2
+go_version: 1.25.0
 
 config_packages:
   lightweight:
@@ -34,6 +34,10 @@ config_packages:
       - twilio
       - exercism
       - yarn
+      - podman
+      - minikube
+      - kubectx
+      - helm
     homebrew_cask_packages:
       - arc
       - iterm2
@@ -44,8 +48,7 @@ config_packages:
       - jetbrains-toolbox
       - switchresx
       - istat-menus
-      - docker
-      - postman
+      - bruno
       - obs
       - cursor
     apt_packages:
@@ -79,6 +82,10 @@ config_packages:
       - twilio
       - exercism
       - yarn
+      - podman
+      - minikube
+      - kubectx
+      - helm
     homebrew_cask_packages:
       - arc
       - iterm2
@@ -92,13 +99,10 @@ config_packages:
       - discord
       - istat-menus
       - signal
-      - docker
-      - postman
+      - bruno
       - gimp
       - obs
       - krisp
-      - microsoft-office
-      - cursor
     apt_packages:
       - neovim
       - tmux

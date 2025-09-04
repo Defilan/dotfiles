@@ -44,7 +44,7 @@ The `install.sh` script performs the following actions:
 #### For MacOS:
 
 - Installs a variety of Homebrew packages, including `neovim`, `tmux`, `git-extras`, `thefuck`, `go`, `kubectl`, `skaffold`, `awscli`, `terraform`, `packer`, `aws-sam-cli`, `node`, `redis`, and `molecule`.
-- Installs several Homebrew cask packages, including `arc`, `iterm2`, `visual-studio-code`, `1password`, `rectangle`, `font-hack-nerd-font`, `jetbrains-toolbox`, `nordvpn`, `switchresx`, `discord`, `istat-menus`, `signal`, `docker`, `postman`, `gimp`, `obs`, and `krisp`.
+- Installs several Homebrew cask packages, including `arc`, `iterm2`, `visual-studio-code`, `1password`, `rectangle`, `font-hack-nerd-font`, `jetbrains-toolbox`, `nordvpn`, `switchresx`, `discord`, `istat-menus`, `signal`, `podman`, `bruno`, `gimp`, `obs`, and `krisp`.
 
 #### For Debian:
 
