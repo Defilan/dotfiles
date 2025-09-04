@@ -23,6 +23,7 @@
     name: "{{ item }}"
   loop: "{{ config_packages[config].homebrew_cask_packages }}"
   when: ansible_os_family == 'Darwin' and config_packages[config].homebrew_cask_packages is defined
+  ignore_errors: true
 
 # Debian specific tasks
 
