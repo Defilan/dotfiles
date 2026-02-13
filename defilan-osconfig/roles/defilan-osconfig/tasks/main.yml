@@ -24,11 +24,12 @@
   tags:
     - directories
 
-- name: Installing oh-my-zsh
+- name: Install oh-my-zsh
   ansible.builtin.git:
     repo: "https://github.com/ohmyzsh/ohmyzsh.git"
     dest: "{{ ansible_env.HOME }}/.oh-my-zsh"
     update: true
+    version: master
   register: ohmyzsh_git_result
   changed_when: "ohmyzsh_git_result.after|default('after') != ohmyzsh_git_result.before|default('before')"
   tags:
@@ -45,10 +46,11 @@
     - zsh
     - shell
 
-- name: Installing ZSH Autosuggestion
+- name: Install ZSH Autosuggestion
   ansible.builtin.git:
     repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
     dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    version: master
   tags:
     - zsh
     - shell

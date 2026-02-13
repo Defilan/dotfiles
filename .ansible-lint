@@ -1,5 +1,6 @@
 ---
 skip_list:
   - yaml[line-length]
+  - role-name
 warn_list:
   - experimental

@@ -45,12 +45,13 @@ jobs:
         run: |
           yamllint -d "{extends: default, rules: {line-length: {max: 200}, truthy: disable}}" \
             defilan-osconfig/playbook.yml \
-            defilan-osconfig/ansible.cfg \
+            defilan-osconfig/requirements.yml \
             defilan-osconfig/roles/defilan-osconfig/tasks/ \
             defilan-osconfig/roles/defilan-osconfig/vars/ \
             defilan-osconfig/roles/defilan-osconfig/defaults/ \
             defilan-osconfig/roles/defilan-osconfig/meta/ \
-            defilan-osconfig/roles/defilan-osconfig/handlers/
+            defilan-osconfig/roles/defilan-osconfig/handlers/ \
+            defilan-osconfig/roles/defilan-osconfig/tests/
 
   ansible-syntax-check:
     name: Ansible Syntax Check
