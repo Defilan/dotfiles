@@ -29,7 +29,7 @@ jobs:
       - name: Install collection dependencies
         run: ansible-galaxy collection install -r defilan-osconfig/requirements.yml
       - name: Run ansible-lint
-        uses: ansible/ansible-lint@v25
+        uses: ansible/ansible-lint@a2bc8b8b13a80802215856c56823d85007d3baf5 # v25
         with:
           working_directory: defilan-osconfig
 

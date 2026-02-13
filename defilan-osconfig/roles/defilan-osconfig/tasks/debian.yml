@@ -41,7 +41,7 @@
   ansible.builtin.get_url:
     url: "https://dl.google.com/go/go{{ go_version }}.linux-{{ go_arch }}.tar.gz"
     dest: "/tmp/go{{ go_version }}.linux-{{ go_arch }}.tar.gz"
-    mode: "0644"
+    mode: "0600"
   become: true
   when: go_current_version.rc != 0 or go_version not in go_current_version.stdout
   vars:

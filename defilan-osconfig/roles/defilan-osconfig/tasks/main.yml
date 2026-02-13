@@ -41,7 +41,7 @@
     src: ".zshrc.j2"
     dest: "{{ ansible_env.HOME }}/.zshrc"
     backup: true
-    mode: "0644"
+    mode: "0600"
   tags:
     - zsh
     - shell
