@@ -71,20 +71,30 @@ load-nvmrc() {
 add-zsh-hook chpwd load-nvmrc
 
 if hash brew 2>/dev/null; then
-    source $(brew --prefix nvm)/nvm.sh
-    source `brew --prefix`/etc/profile.d/z.sh
+    local _nvm_prefix="$(brew --prefix nvm 2>/dev/null)"
+    [[ -n "$_nvm_prefix" && -f "$_nvm_prefix/nvm.sh" ]] && source "$_nvm_prefix/nvm.sh"
+    local _z_path="$(brew --prefix)/etc/profile.d/z.sh"
+    [[ -f "$_z_path" ]] && source "$_z_path"
     # when sourcing, check and ensure that the correct Node version is set
     load-nvmrc
-
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 if [ -z ${DOTFILES_LOADED+x} ]; then
+    if hash brew 2>/dev/null; then
+        brew_prefix=$(brew --prefix)
+    elif [[ -d /opt/homebrew ]]; then
+        brew_prefix=/opt/homebrew
+    else
+        brew_prefix=/usr/local
+    fi
     # install zsh-syntax-highlighting
-    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    [[ -f "$brew_prefix/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] && \
+        source "$brew_prefix/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
     # install zsh autosuggestions
-    source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    [[ -f "$brew_prefix/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && \
+        source "$brew_prefix/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 fi
 
 DOTFILES_LOADED=1

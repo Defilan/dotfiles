@@ -43,7 +43,6 @@ Plug 'mklabs/split-term.vim' "better splits in vim. "
 Plug 'mattn/emmet-vim', { 'for': 'html' } " emmet support for vim - easily create markdup wth CSS-like syntax
 Plug 'gregsexton/MatchTag', { 'for': 'html' } " match tags in html, similar to paren support
 Plug 'othree/html5.vim', { 'for': 'html' } " html5 support
-Plug 'mustache/vim-mustache-handlebars' " mustach support
 Plug 'digitaltoad/vim-jade', { 'for': ['jade', 'pug'] } " jade support
 
 " JavaScript
@@ -72,10 +71,8 @@ Plug 'stephpy/vim-yaml', { 'for': 'yaml' }
 Plug 'martinda/Jenkinsfile-vim-syntax', { 'for': 'Jenkinsfile' } " Jenkinsfile support
 Plug 'elzr/vim-json', { 'for': 'json' } " JSON support
 Plug 'Shougo/vimproc.vim', { 'do': 'make' } " interactive command execution in vim
-Plug 'fatih/vim-go', { 'for': 'go' } " go support
 Plug 'timcharper/textile.vim', { 'for': 'textile' } " textile support
-Plug 'tclem/vim-arduino' " arduino support - compile wihtout needing to open the arduino IDE
-Plug 'elzr/vim-json', { 'for': 'json' } " JSON support
+Plug 'tclem/vim-arduino' " arduino support - compile without needing to open the arduino IDE
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' } " ruby support
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'hashivim/vim-terraform', { 'for': 'terraform'}

@@ -34,8 +34,6 @@ done
 printf "\n\nCreating vim symlinks\n"
 printf "==============================\n"
 
-#!/usr/bin/env bash
-
 vimfiles_keys=(~/.vim ~/.vimrc)
 vimfiles_values=("$DOTFILES/config/nvim" "$DOTFILES/config/nvim/init.vim")
 

@@ -1,4 +1,4 @@
-name: Shell Lint
+name: Lint
 
 on:
   push:
@@ -9,13 +9,22 @@ on:
       - main
 
 jobs:
-  ansible-lint:
+  shell-lint:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Lint
+      - name: Shell Lint
         uses: azohra/shell-linter@latest
         with:
           path: "install.sh,install"
+
+  ansible-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Run ansible-lint
+        uses: ansible/ansible-lint@v25
+        with:
+          working_directory: defilan-osconfig

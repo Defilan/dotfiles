@@ -1,0 +1,33 @@
+---
+# macOS-specific tasks
+
+- name: Add Homebrew taps
+  community.general.homebrew_tap:
+    name: "{{ item }}"
+  loop: "{{ config_packages[config].homebrew_taps }}"
+  when: config_packages[config].homebrew_taps is defined
+  tags:
+    - packages
+    - homebrew
+
+- name: Install brew packages
+  community.general.homebrew:
+    name: "{{ config_packages[config].homebrew_packages }}"
+  when: config_packages[config].homebrew_packages is defined
+  tags:
+    - packages
+    - homebrew
+
+- name: Install cask packages
+  community.general.homebrew_cask:
+    name: "{{ config_packages[config].homebrew_cask_packages }}"
+    accept_external_apps: true
+  when: config_packages[config].homebrew_cask_packages is defined
+  register: cask_result
+  failed_when:
+    - cask_result is failed
+    - "'already installed' not in (cask_result.msg | default(''))"
+  tags:
+    - packages
+    - homebrew
+    - cask

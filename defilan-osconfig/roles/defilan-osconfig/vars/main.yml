@@ -1,6 +1,44 @@
 ---
-# vars file for defilan-macos
-go_version: 1.25.0
+# vars file for defilan-osconfig
+go_version: "1.23.6"
+
+# Shared package lists using YAML anchors to avoid duplication
+_shared_homebrew_taps: &shared_taps
+  - hashicorp/tap
+  - aws/tap
+  - twilio/brew
+
+_shared_homebrew_packages: &shared_homebrew
+  - neovim
+  - tmux
+  - git-extras
+  - thefuck
+  - go
+  - kubectl
+  - skaffold
+  - awscli
+  - hashicorp/tap/terraform
+  - hashicorp/tap/packer
+  - aws-sam-cli
+  - node
+  - redis
+  - molecule
+  - battery
+  - twilio
+  - exercism
+  - yarn
+  - podman
+  - minikube
+  - kubectx
+  - helm
+
+_shared_apt_packages: &shared_apt
+  - neovim
+  - tmux
+  - git-extras
+  - thefuck
+  - zsh
+  - golang-go
 
 config_packages:
   lightweight:
@@ -11,33 +49,8 @@ config_packages:
       - rectangle
       - istat-menus
   developer:
-    homebrew_taps:
-      - hashicorp/tap
-      - aws/tap
-      - twilio/brew
-    homebrew_packages:
-      - neovim
-      - tmux
-      - git-extras
-      - thefuck
-      - go
-      - kubectl
-      - skaffold
-      - awscli
-      - hashicorp/tap/terraform
-      - hashicorp/tap/packer
-      - aws-sam-cli
-      - node
-      - redis
-      - molecule
-      - battery
-      - twilio
-      - exercism
-      - yarn
-      - podman
-      - minikube
-      - kubectx
-      - helm
+    homebrew_taps: *shared_taps
+    homebrew_packages: *shared_homebrew
     homebrew_cask_packages:
       - arc
       - iterm2
@@ -51,41 +64,10 @@ config_packages:
       - bruno
       - obs
       - cursor
-    apt_packages:
-      - neovim
-      - tmux
-      - git-extras
-      - thefuck
-      - zsh
-      - golang-go
+    apt_packages: *shared_apt
   home:
-    homebrew_taps:
-      - hashicorp/tap
-      - aws/tap
-      - twilio/brew
-    homebrew_packages:
-      - neovim
-      - tmux
-      - git-extras
-      - thefuck
-      - go
-      - kubectl
-      - skaffold
-      - awscli
-      - hashicorp/tap/terraform
-      - hashicorp/tap/packer
-      - aws-sam-cli
-      - node
-      - redis
-      - molecule
-      - battery
-      - twilio
-      - exercism
-      - yarn
-      - podman
-      - minikube
-      - kubectx
-      - helm
+    homebrew_taps: *shared_taps
+    homebrew_packages: *shared_homebrew
     homebrew_cask_packages:
       - arc
       - iterm2
@@ -103,14 +85,10 @@ config_packages:
       - gimp
       - obs
       - krisp
-    apt_packages:
-      - neovim
-      - tmux
-      - git-extras
-      - thefuck
-      - zsh
-      - golang-go
+      - cursor
+    apt_packages: *shared_apt
+
 defilan_directories:
-- ~/stuffy
-- ~/stuffy/code
-- ~/stuffy/playground
+  - ~/stuffy
+  - ~/stuffy/code
+  - ~/stuffy/playground
