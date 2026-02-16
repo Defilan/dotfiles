@@ -45,7 +45,7 @@
   become: true
   when: go_current_version.rc != 0 or go_version not in go_current_version.stdout
   vars:
-    go_arch: "{{ 'arm64' if ansible_architecture == 'aarch64' else 'amd64' }}"
+    go_arch: "{{ 'arm64' if ansible_facts.architecture == 'aarch64' else 'amd64' }}"
   tags:
     - go
 
@@ -57,7 +57,7 @@
   become: true
   when: go_current_version.rc != 0 or go_version not in go_current_version.stdout
   vars:
-    go_arch: "{{ 'arm64' if ansible_architecture == 'aarch64' else 'amd64' }}"
+    go_arch: "{{ 'arm64' if ansible_facts.architecture == 'aarch64' else 'amd64' }}"
   tags:
     - go
 

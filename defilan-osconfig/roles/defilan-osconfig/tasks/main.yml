@@ -8,18 +8,18 @@
 # OS-specific tasks
 - name: Include macOS tasks
   ansible.builtin.import_tasks: darwin.yml
-  when: ansible_os_family == 'Darwin'
+  when: ansible_facts["os_family"] == 'Darwin'
 
 - name: Include Debian tasks
   ansible.builtin.import_tasks: debian.yml
-  when: ansible_os_family == 'Debian'
+  when: ansible_facts["os_family"] == 'Debian'
 
 # Common tasks
 - name: Create directories
   ansible.builtin.file:
     path: "{{ item | expanduser }}"
     state: directory
-    mode: "0755"
+    mode: "0750"
   loop: "{{ defilan_directories }}"
   tags:
     - directories
