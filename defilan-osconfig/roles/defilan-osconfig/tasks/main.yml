@@ -1,104 +1,56 @@
 ---
-# tasks file for defilan-macos
+# tasks file for defilan-osconfig
 
 - name: Set config variable
-  set_fact:
-    config: "{{ lookup('env', 'config') }}"
+  ansible.builtin.set_fact:
+    config: "{{ config | default(lookup('env', 'CONFIG')) | default('lightweight') }}"
 
-- name: Add Extra Casks
-  community.general.homebrew_tap:
-    name: "{{ item }}"
-  loop: "{{ config_packages[config].homebrew_taps }}"
-  when: ansible_os_family == 'Darwin' and config_packages[config].homebrew_taps is defined
+# OS-specific tasks
+- name: Include macOS tasks
+  ansible.builtin.import_tasks: darwin.yml
+  when: ansible_facts["os_family"] == 'Darwin'
 
+- name: Include Debian tasks
+  ansible.builtin.import_tasks: debian.yml
+  when: ansible_facts["os_family"] == 'Debian'
 
-- name: Install brew packages 
-  homebrew:
-    name: "{{ item }}"
-  loop: "{{ config_packages[config].homebrew_packages }}"
-  when: ansible_os_family == 'Darwin' and config_packages[config].homebrew_packages is defined
-
-- name: Install cask packages
-  homebrew_cask:
-    name: "{{ item }}"
-  loop: "{{ config_packages[config].homebrew_cask_packages }}"
-  when: ansible_os_family == 'Darwin' and config_packages[config].homebrew_cask_packages is defined
-  ignore_errors: true
-
-# Debian specific tasks
-
-- name: Update apt cache
-  apt:
-    update_cache: yes
-  become: yes
-  when: ansible_os_family == 'Debian'
-
-- name: Install apt packages
-  apt:
-    name: "{{ item }}"
-  loop: "{{ config_packages[config].apt_packages }}"
-  become: yes
-  when: ansible_os_family == 'Debian' and config_packages[config].apt_packages is defined
-
-  # Configure ZSH and directories
-
-- name: Create stuffy directory
-  file:
-    path: "{{ ansible_env.HOME }}/stuffy"
+# Common tasks
+- name: Create directories
+  ansible.builtin.file:
+    path: "{{ item | expanduser }}"
     state: directory
+    mode: "0750"
+  loop: "{{ defilan_directories }}"
+  tags:
+    - directories
 
-- name: Create subdirectories
-  file:
-    path: "{{ ansible_env.HOME }}/stuffy/{{ item }}"
-    state: directory
-  loop:
-    - code
-    - playground
-  
-- name: Download Go tar
-  get_url:
-    url: "https://dl.google.com/go/go{{ go_version }}.linux-amd64.tar.gz"
-    dest: "/tmp/go{{ go_version }}.linux-amd64.tar.gz"
-  become: yes
-  when: ansible_os_family == 'Debian'
-
-- name: Extract Go tar
-  unarchive:
-    src: "/tmp/go{{ go_version }}.linux-amd64.tar.gz"
-    dest: "/usr/local"
-    remote_src: yes
-  become: yes
-  when: ansible_os_family == 'Debian'
-
-- name: Add Go to PATH
-  lineinfile:
-    path: /etc/profile
-    line: 'export PATH=$PATH:/usr/local/go/bin'
-  become: yes
-  when: ansible_os_family == 'Debian'
-
-- name: Set ZSH as the default shell
-  user:
-    name: "{{ ansible_env.USER }}"
-    shell: /bin/zsh
-  become: yes
-  when: ansible_os_family == 'Debian'
-
-- name: Installing oh-my-zsh
-  git:
-    repo: "https://github.com/robbyrussell/oh-my-zsh.git"
-    dest: "{{ ansible_env.HOME + '/.oh-my-zsh' }}"
-    update: yes
-  register: defilan_macos_git_result
-  changed_when: "defilan_macos_git_result.after|default('after') != defilan_macos_git_result.before|default('before')"
+- name: Install oh-my-zsh
+  ansible.builtin.git:
+    repo: "https://github.com/ohmyzsh/ohmyzsh.git"
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh"
+    update: true
+    version: master
+  register: ohmyzsh_git_result
+  changed_when: "ohmyzsh_git_result.after|default('after') != ohmyzsh_git_result.before|default('before')"
+  tags:
+    - zsh
+    - shell
 
 - name: Configuring oh-my-zsh
-  template:
+  ansible.builtin.template:
     src: ".zshrc.j2"
-    dest: "{{ ansible_env.HOME + '/.zshrc' }}"
-    backup: yes
+    dest: "{{ ansible_env.HOME }}/.zshrc"
+    backup: true
+    mode: "0600"
+  tags:
+    - zsh
+    - shell
 
-- name: Installing ZSH Autosuggestion
-  git:
+- name: Install ZSH Autosuggestion
+  ansible.builtin.git:
     repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
-    dest: "{{ ansible_env.HOME + '/.oh-my-zsh/custom/plugins/zsh-autosuggestions' }}"
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    version: master
+  tags:
+    - zsh
+    - shell

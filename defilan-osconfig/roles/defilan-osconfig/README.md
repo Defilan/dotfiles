@@ -1,38 +1,66 @@
-Role Name
-=========
+# defilan-osconfig
 
-A brief description of the role goes here.
+Ansible role for configuring macOS and Debian development environments.
 
-Requirements
-------------
+## Configuration Profiles
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+This role supports three configuration profiles, selected via the `config` variable:
 
-Role Variables
---------------
+| Profile | Description |
+|---------|-------------|
+| `lightweight` | Essentials only -- basic cask apps (Arc, iTerm2, 1Password, Rectangle, iStat Menus) |
+| `developer` | Full developer setup -- CLI tools, languages, containers, and dev-focused cask apps |
+| `home` | Productivity/full config -- everything in developer plus personal apps (NordVPN, Discord, Signal, GIMP, Krisp) |
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+## Requirements
 
-Dependencies
-------------
+- Ansible >= 2.14
+- `community.general` collection (see `requirements.yml`)
+- macOS with Homebrew or Debian/Ubuntu with apt
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+Install collection dependencies:
 
-Example Playbook
-----------------
+```bash
+ansible-galaxy collection install -r requirements.yml
+```
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+## Role Variables
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `config` | `lightweight` | Configuration profile to use |
+| `go_version` | `1.23.6` | Go version to install on Debian |
 
-License
--------
+Package lists are defined in `vars/main.yml` under the `config_packages` dictionary.
 
-BSD
+## Usage
 
-Author Information
-------------------
+```bash
+# Run with install.sh (recommended)
+./install.sh
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+# Run playbook directly
+ansible-playbook defilan-osconfig/playbook.yml -e "config=developer"
+```
+
+## Tags
+
+Tasks are tagged for selective runs:
+
+- `packages` -- all package installation
+- `homebrew` -- Homebrew packages and casks (macOS)
+- `cask` -- Homebrew cask packages only (macOS)
+- `apt` -- apt packages (Debian)
+- `go` -- Go language installation (Debian)
+- `zsh` / `shell` -- oh-my-zsh and shell configuration
+- `directories` -- directory creation
+
+Example: `ansible-playbook playbook.yml -e "config=developer" --tags packages`
+
+## License
+
+MIT
+
+## Author
+
+Christopher Maher

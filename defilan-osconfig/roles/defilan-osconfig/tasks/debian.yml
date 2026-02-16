@@ -1,0 +1,79 @@
+---
+# Debian-specific tasks
+
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: true
+  become: true
+  tags:
+    - packages
+    - apt
+
+- name: Install apt packages
+  ansible.builtin.apt:
+    name: "{{ config_packages[config].apt_packages }}"
+  become: true
+  when: config_packages[config].apt_packages is defined
+  tags:
+    - packages
+    - apt
+
+- name: Check current Go version
+  ansible.builtin.command: /usr/local/go/bin/go version
+  register: go_current_version
+  changed_when: false
+  failed_when: false
+  tags:
+    - go
+
+- name: Remove old Go installation
+  ansible.builtin.file:
+    path: /usr/local/go
+    state: absent
+  become: true
+  when:
+    - go_current_version.rc == 0
+    - go_version not in go_current_version.stdout
+  tags:
+    - go
+
+- name: Download Go tar
+  ansible.builtin.get_url:
+    url: "https://dl.google.com/go/go{{ go_version }}.linux-{{ go_arch }}.tar.gz"
+    dest: "/tmp/go{{ go_version }}.linux-{{ go_arch }}.tar.gz"
+    mode: "0600"
+  become: true
+  when: go_current_version.rc != 0 or go_version not in go_current_version.stdout
+  vars:
+    go_arch: "{{ 'arm64' if ansible_facts.architecture == 'aarch64' else 'amd64' }}"
+  tags:
+    - go
+
+- name: Extract Go tar
+  ansible.builtin.unarchive:
+    src: "/tmp/go{{ go_version }}.linux-{{ go_arch }}.tar.gz"
+    dest: /usr/local
+    remote_src: true
+  become: true
+  when: go_current_version.rc != 0 or go_version not in go_current_version.stdout
+  vars:
+    go_arch: "{{ 'arm64' if ansible_facts.architecture == 'aarch64' else 'amd64' }}"
+  tags:
+    - go
+
+- name: Add Go to PATH
+  ansible.builtin.lineinfile:
+    path: /etc/profile
+    line: 'export PATH=$PATH:/usr/local/go/bin'
+  become: true
+  tags:
+    - go
+
+- name: Set ZSH as the default shell
+  ansible.builtin.user:
+    name: "{{ ansible_env.USER }}"
+    shell: /bin/zsh
+  become: true
+  tags:
+    - zsh
+    - shell

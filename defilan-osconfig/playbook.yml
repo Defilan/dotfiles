@@ -1,7 +1,7 @@
-# setup.yml
 ---
-
-- hosts: localhost
+- name: Configure development environment
+  hosts: localhost
   connection: local
+  gather_facts: true
   roles:
-  - defilan-osconfig
+    - defilan-osconfig

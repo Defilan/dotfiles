@@ -1,5 +1,6 @@
 ---
-- hosts: localhost
-  remote_user: root
+- name: Test defilan-osconfig role
+  hosts: localhost
+  connection: local
   roles:
-    - defilan-macos
+    - defilan-osconfig

@@ -1,3 +1,10 @@
 plugged/
 .netrwhist
 git/gitconfig.symlink
+*.env
+.env.*
+*.pem
+*.key
+node_modules/
+__pycache__/
+.terraform.lock.hcl
