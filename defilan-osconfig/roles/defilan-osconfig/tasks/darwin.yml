@@ -12,8 +12,9 @@
 
 - name: Trust non-official Homebrew taps
   community.general.homebrew_tap:
-    name: "{{ config_packages[config].trusted_taps }}"
+    name: "{{ item }}"
     trust: true
+  loop: "{{ config_packages[config].trusted_taps }}"
   when: config_packages[config].trusted_taps is defined
   tags:
     - packages

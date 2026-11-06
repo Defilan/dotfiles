@@ -46,7 +46,37 @@
     - name: Shared Homebrew formulae are unchanged
       ansible.builtin.assert:
         that:
-          - "'twilio' in config_packages.developer.homebrew_packages"
-          - "'hashicorp/tap/terraform' in config_packages.developer.homebrew_packages"
-          - "'hashicorp/tap/packer' in config_packages.developer.homebrew_packages"
+          - config_packages.developer.homebrew_packages | sort == ['aws-sam-cli', 'awscli', 'battery', 'exercism', 'git-extras', 'go', 'hashicorp/tap/packer', 'hashicorp/tap/terraform', 'helm', 'kubectl', 'kubectx', 'minikube', 'molecule', 'neovim', 'node', 'podman', 'redis', 'skaffold', 'thefuck', 'tmux', 'twilio', 'yarn']
       tags: [parity]
+
+- name: Darwin task file trusts each tap it lists
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars_files:
+    - ../roles/defilan-osconfig/vars/main.yml
+  tasks:
+    - name: Read the darwin task file
+      tags: [trust-task]
+      ansible.builtin.set_fact:
+        darwin_tasks_raw: "{{ lookup('ansible.builtin.file', playbook_dir ~ '/../roles/defilan-osconfig/tasks/darwin.yml') | from_yaml | selectattr('name', 'match', '^Trust ') | list }}"
+        main_tasks: "{{ lookup('ansible.builtin.file', playbook_dir ~ '/../roles/defilan-osconfig/tasks/main.yml') | from_yaml }}"
+
+    - name: Read the trust task body
+      tags: [trust-task]
+      ansible.builtin.set_fact:
+        trust_task: "{{ (darwin_tasks_raw | first) if darwin_tasks_raw | length else {} }}"
+
+    - name: The import task includes darwin.yml
+      ansible.builtin.assert:
+        that:
+          - main_tasks | map('dict2items') | map('selectattr', 'key', 'equalto', 'ansible.builtin.import_tasks') | map('map', attribute='value') | flatten | select('equalto', 'darwin.yml') | list | length == 1
+
+    - name: There is one trust task, looping over trusted_taps with trust true
+      ansible.builtin.assert:
+        that:
+          - darwin_tasks_raw | length == 1
+          - trust_task['community.general.homebrew_tap'].trust
+          - "'trusted_taps' in (trust_task.loop | default(''))"
+          - "'homebrew_tap' in trust_task | to_json"
+      tags: [trust-task]
