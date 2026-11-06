@@ -1,0 +1,106 @@
+---
+# Asserts the package lists in roles/defilan-osconfig/vars/main.yml and the
+# Homebrew trust task in roles/defilan-osconfig/tasks/darwin.yml.
+# Run from the defilan-osconfig directory:
+#   ansible-playbook tests/assert-package-lists.yml
+- name: Package list assertions
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars_files:
+    - ../roles/defilan-osconfig/vars/main.yml
+  tasks:
+    - name: Trusted taps are HashiCorp and Twilio only
+      ansible.builtin.assert:
+        that:
+          - config_packages.developer.trusted_taps | default([]) | sort == ['hashicorp/tap', 'twilio/brew']
+          - config_packages.home.trusted_taps | default([]) | sort == ['hashicorp/tap', 'twilio/brew']
+        fail_msg: "trusted_taps: developer={{ config_packages.developer.trusted_taps | default('MISSING') }} home={{ config_packages.home.trusted_taps | default('MISSING') }}"
+      tags: [taps]
+
+    - name: Lightweight profile has no trusted taps
+      ansible.builtin.assert:
+        that:
+          - config_packages.lightweight.trusted_taps is not defined
+        fail_msg: "lightweight has trusted_taps={{ config_packages.lightweight.trusted_taps | default('MISSING') }}"
+      tags: [taps]
+
+    - name: Ghostty is a cask for developer and home
+      ansible.builtin.assert:
+        that:
+          - "'ghostty' in config_packages.developer.homebrew_cask_packages"
+          - "'ghostty' in config_packages.home.homebrew_cask_packages"
+      tags: [casks]
+
+    - name: Cursor is a cask for neither developer nor home
+      ansible.builtin.assert:
+        that:
+          - "'cursor' not in config_packages.developer.homebrew_cask_packages"
+          - "'cursor' not in config_packages.home.homebrew_cask_packages"
+      tags: [casks]
+
+    - name: Lightweight profile casks are unchanged
+      ansible.builtin.assert:
+        that:
+          - config_packages.lightweight.homebrew_cask_packages == ['arc', 'iterm2', '1password', 'rectangle', 'istat-menus']
+      tags: [parity]
+
+    - name: Shared Homebrew formulae are unchanged
+      ansible.builtin.assert:
+        that:
+          - config_packages.developer.homebrew_packages | sort == expected_formulae
+      vars:
+        expected_formulae:
+          - aws-sam-cli
+          - awscli
+          - battery
+          - exercism
+          - git-extras
+          - go
+          - hashicorp/tap/packer
+          - hashicorp/tap/terraform
+          - helm
+          - kubectl
+          - kubectx
+          - minikube
+          - molecule
+          - neovim
+          - node
+          - podman
+          - redis
+          - skaffold
+          - thefuck
+          - tmux
+          - twilio
+          - yarn
+      tags: [parity]
+
+- name: Darwin task file trusts each tap it lists
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Read the darwin and main task files
+      vars:
+        darwin_file: "{{ playbook_dir }}/../roles/defilan-osconfig/tasks/darwin.yml"
+      ansible.builtin.set_fact:
+        darwin_tasks_raw: "{{ (lookup('ansible.builtin.file', darwin_file) | from_yaml) | selectattr('name', 'match', '^Trust ') | list }}"
+        main_tasks: "{{ lookup('ansible.builtin.file', playbook_dir ~ '/../roles/defilan-osconfig/tasks/main.yml') | from_yaml }}"
+
+    - name: Homebrew trust runs on darwin only
+      ansible.builtin.assert:
+        that:
+          - (main_tasks | map('dict2items')
+             | map('selectattr', 'key', 'equalto', 'ansible.builtin.import_tasks')
+             | map('map', attribute='value') | flatten
+             | select('equalto', 'darwin.yml') | list | length) == 1
+
+    - name: There is one trust task, looping over trusted_taps with trust true
+      ansible.builtin.assert:
+        that:
+          - darwin_tasks_raw | length == 1
+          - (darwin_tasks_raw | first)['community.general.homebrew_tap'].trust
+          - "'trusted_taps' in ((darwin_tasks_raw | first).loop | default(''))"
+          - ((darwin_tasks_raw | first).when | default('')) == when_trusted_taps_defined
+      vars:
+        when_trusted_taps_defined: "config_packages[config].trusted_taps is defined"
