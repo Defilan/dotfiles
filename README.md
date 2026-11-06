@@ -45,12 +45,12 @@ The `install.sh` script performs the following actions:
 #### For MacOS:
 
 - Installs a variety of Homebrew packages, including `neovim`, `tmux`, `git-extras`, `thefuck`, `go`, `kubectl`, `skaffold`, `awscli`, `terraform`, `packer`, `aws-sam-cli`, `node`, `redis`, and `molecule`.
-- Installs `ghostty` and the casks below, selected by profile:
+- Installs Homebrew casks selected by profile:
 
 | Profile | Casks |
 |---------|-------|
 | Lightweight | `arc`, `iterm2`, `1password`, `rectangle`, `istat-menus` |
-| Developer | the lightweight casks, plus `visual-studio-code`, `font-hack-nerd-font`, `jetbrains-toolbox`, `switchresx`, `bruno`, `obs` |
+| Developer | the lightweight casks, plus `visual-studio-code`, `font-hack-nerd-font`, `jetbrains-toolbox`, `switchresx`, `bruno`, `obs`, `ghostty` |
 | Home | the developer casks, plus `nordvpn`, `discord`, `signal`, `gimp`, `krisp` |
 
 #### For Debian:
