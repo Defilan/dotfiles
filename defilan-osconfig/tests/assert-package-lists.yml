@@ -1,0 +1,52 @@
+---
+# Asserts the package lists in roles/defilan-osconfig/vars/main.yml.
+# Run from the defilan-osconfig directory.
+- name: Package list assertions
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars_files:
+    - ../roles/defilan-osconfig/vars/main.yml
+  tasks:
+    - name: Trusted taps are HashiCorp and Twilio only
+      ansible.builtin.assert:
+        that:
+          - config_packages.developer.trusted_taps | default([]) | sort == ['hashicorp/tap', 'twilio/brew']
+          - config_packages.home.trusted_taps | default([]) | sort == ['hashicorp/tap', 'twilio/brew']
+        fail_msg: "trusted_taps: developer={{ config_packages.developer.trusted_taps | default('MISSING') }} home={{ config_packages.home.trusted_taps | default('MISSING') }}"
+      tags: [taps]
+
+    - name: Lightweight profile has no trusted taps
+      ansible.builtin.assert:
+        that:
+          - config_packages.lightweight.trusted_taps is not defined
+        fail_msg: "lightweight has trusted_taps={{ config_packages.lightweight.trusted_taps | default('MISSING') }}"
+      tags: [taps]
+
+    - name: Ghostty is a cask for developer and home
+      ansible.builtin.assert:
+        that:
+          - "'ghostty' in config_packages.developer.homebrew_cask_packages"
+          - "'ghostty' in config_packages.home.homebrew_cask_packages"
+      tags: [casks]
+
+    - name: Cursor is a cask for neither developer nor home
+      ansible.builtin.assert:
+        that:
+          - "'cursor' not in config_packages.developer.homebrew_cask_packages"
+          - "'cursor' not in config_packages.home.homebrew_cask_packages"
+      tags: [casks]
+
+    - name: Lightweight profile casks are unchanged
+      ansible.builtin.assert:
+        that:
+          - config_packages.lightweight.homebrew_cask_packages == ['arc', 'iterm2', '1password', 'rectangle', 'istat-menus']
+      tags: [parity]
+
+    - name: Shared Homebrew formulae are unchanged
+      ansible.builtin.assert:
+        that:
+          - "'twilio' in config_packages.developer.homebrew_packages"
+          - "'hashicorp/tap/terraform' in config_packages.developer.homebrew_packages"
+          - "'hashicorp/tap/packer' in config_packages.developer.homebrew_packages"
+      tags: [parity]

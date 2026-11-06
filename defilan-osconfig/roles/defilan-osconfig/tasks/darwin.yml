@@ -10,6 +10,15 @@
     - packages
     - homebrew
 
+- name: Trust non-official Homebrew taps
+  community.general.homebrew_tap:
+    name: "{{ config_packages[config].trusted_taps }}"
+    trust: true
+  when: config_packages[config].trusted_taps is defined
+  tags:
+    - packages
+    - homebrew
+
 - name: Install brew packages
   community.general.homebrew:
     name: "{{ config_packages[config].homebrew_packages }}"

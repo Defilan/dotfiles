@@ -8,6 +8,10 @@ _shared_homebrew_taps: &shared_taps
   - aws/tap
   - twilio/brew
 
+_shared_trusted_taps: &shared_trusted_taps
+  - hashicorp/tap
+  - twilio/brew
+
 _shared_homebrew_packages: &shared_homebrew
   - neovim
   - tmux
@@ -50,6 +54,7 @@ config_packages:
       - istat-menus
   developer:
     homebrew_taps: *shared_taps
+    trusted_taps: *shared_trusted_taps
     homebrew_packages: *shared_homebrew
     homebrew_cask_packages:
       - arc
@@ -63,10 +68,11 @@ config_packages:
       - istat-menus
       - bruno
       - obs
-      - cursor
+      - ghostty
     apt_packages: *shared_apt
   home:
     homebrew_taps: *shared_taps
+    trusted_taps: *shared_trusted_taps
     homebrew_packages: *shared_homebrew
     homebrew_cask_packages:
       - arc
@@ -85,7 +91,7 @@ config_packages:
       - gimp
       - obs
       - krisp
-      - cursor
+      - ghostty
     apt_packages: *shared_apt
 
 defilan_directories:

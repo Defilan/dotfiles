@@ -39,18 +39,25 @@ The `install.sh` script performs the following actions:
 ### What does the Ansible playbook do?
 #### The Ansible playbook installs a variety of applications and performs some customizations to the MacOS or Debian environment. Here's a brief overview:
 
-1. Taps into several Homebrew repositories, including HashiCorp, AWS, and Homebrew's own font cask.
+1. Taps into several Homebrew repositories, including HashiCorp, AWS, and Twilio.
+2. Trusts the HashiCorp and Twilio taps, which Homebrew requires before it loads a non-official tap.
 
 #### For MacOS:
 
 - Installs a variety of Homebrew packages, including `neovim`, `tmux`, `git-extras`, `thefuck`, `go`, `kubectl`, `skaffold`, `awscli`, `terraform`, `packer`, `aws-sam-cli`, `node`, `redis`, and `molecule`.
-- Installs several Homebrew cask packages, including `arc`, `iterm2`, `visual-studio-code`, `1password`, `rectangle`, `font-hack-nerd-font`, `jetbrains-toolbox`, `nordvpn`, `switchresx`, `discord`, `istat-menus`, `signal`, `podman`, `bruno`, `gimp`, `obs`, and `krisp`.
+- Installs `ghostty` and the casks below, selected by profile:
+
+| Profile | Casks |
+|---------|-------|
+| Lightweight | `arc`, `iterm2`, `1password`, `rectangle`, `istat-menus` |
+| Developer | the lightweight casks, plus `visual-studio-code`, `font-hack-nerd-font`, `jetbrains-toolbox`, `switchresx`, `bruno`, `obs` |
+| Home | the developer casks, plus `nordvpn`, `discord`, `signal`, `gimp`, `krisp` |
 
 #### For Debian:
 
 - Installs a variety of packages using the package manager, including `neovim`, `tmux`, `git-extras`, `thefuck`, `go`, `kubectl`, `skaffold`, `awscli`, `terraform`, `packer`, `aws-sam-cli`, `node`, `redis`, and `molecule`.
 
-2. Creates directories at `~/stuffy`, `~/stuffy/code`, and `~/stuffy/playground`.
+3. Creates directories at `~/stuffy`, `~/stuffy/code`, and `~/stuffy/playground`.
 
 ## Notes
 

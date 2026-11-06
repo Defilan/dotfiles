@@ -9,7 +9,7 @@ This role supports three configuration profiles, selected via the `config` varia
 | Profile | Description |
 |---------|-------------|
 | `lightweight` | Essentials only -- basic cask apps (Arc, iTerm2, 1Password, Rectangle, iStat Menus) |
-| `developer` | Full developer setup -- CLI tools, languages, containers, and dev-focused cask apps |
+| `developer` | Full developer setup -- CLI tools, languages, containers, and dev-focused cask apps (including Ghostty) |
 | `home` | Productivity/full config -- everything in developer plus personal apps (NordVPN, Discord, Signal, GIMP, Krisp) |
 
 ## Requirements
